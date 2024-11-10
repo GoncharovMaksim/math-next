@@ -1,95 +1,68 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+// src/app/page.js
 
+import Head from 'next/head';
+import Image from 'next/image';
+import styles from './page.module.css';
+import '../public/style.css';
+import Script from 'next/script';
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+	return (
+		<>
+			<Head>
+				<meta charSet='UTF-8' />
+				<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+				<title>Математический опросник</title>
+			</Head>
+			<div className='container'>
+				<h1>Математический опросник</h1>
+				<div>
+					<input type='text' name='user-name' placeholder='введите свое имя' />
+				</div>
+				<div className='timer'>
+					<span className='min'>00</span>
+					<span className='dot'>:</span>
+					<span className='sec'>00</span>
+				</div>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+				<div className='settings'>
+					<label>
+						<h2>Выберите действие:</h2>
+					</label>
+					<select className='dropdown1'>
+						<option value='*'>УМНОЖЕНИЕ</option>
+						<option value='+'>СЛОЖЕНИЕ</option>
+						<option value='-'>ВЫЧИТАНИЕ</option>
+						<option value='/'>ДЕЛЕНИЕ</option>
+					</select>
+
+					<label>
+						<h2>Сложность:</h2>
+					</label>
+					<select className='dropdown2'>
+						<option value='1'>УРОВЕНЬ 1</option>
+						<option value='2'>УРОВЕНЬ 2</option>
+						<option value='3'>УРОВЕНЬ 3</option>
+					</select>
+				</div>
+
+				<div className='question'></div>
+				<div>
+					<input type='number' name='answer' placeholder='ваш ответ' />
+				</div>
+				<div>
+					<button className='btn-start'>НАЧАТЬ</button>
+				</div>
+				<div>
+					<button className='btn-check'>ПРОДОЛЖИТЬ</button>
+				</div>
+				<div className='end-game'>
+					<h2>Ваша оценка:</h2>
+					<div className='big-number'></div>
+				</div>
+				<div className='output'></div>
+			</div>
+			<Script src='/app.js' type='module' strategy='beforeInteractive' />
+			<Script src='/tgApi.js' type='module' strategy='beforeInteractive' />
+		</>
+	);
 }
